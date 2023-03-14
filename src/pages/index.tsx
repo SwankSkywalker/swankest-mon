@@ -1,7 +1,12 @@
 import { api } from "@/utils/api";
 
 export default function Home() {
-  const hello = api.example.hello
+  const { data, isLoading } = api.example.hello.useQuery({ text: "Swank"});
+
+  if (isLoading) return <div>Loading...</div>;
+
+  if (data) return <div>{data.greeting}</div>;
+
     return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
       <div className="text-2xl text-center">Which Pokémon is roundest?</div>
